@@ -36,11 +36,6 @@ sed -i 's/set wireless.default_radio${devidx}.ssid=OpenWrt/set wireless.default_
 sed -i 's/set wireless.default_radio${devidx}.encryption=none/set wireless.default_radio${devidx}.encryption=psk2/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=jywx.com' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-#更改wan口默认dns
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
 
 #增加vpn0\wg0\4G_LTE接口
 #Ovpn
@@ -78,13 +73,3 @@ sed -i "/exit 0/i\uci commit dropbear" package/lean/default-settings/files/zzz-d
 sed -i "/exit 0/i\uci set uhttpd.main.listen_http=\'0.0.0.0:24681\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set uhttpd.main.listen_https=\'0.0.0.0:24682\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit uhttpd" package/lean/default-settings/files/zzz-default-settings 
-
-#添加文件权限
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/flowcontrol-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
-
-#增加crontab任务
-sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/update-ip-china-list\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\echo \'\*\/5 \* \* \* \* sh \/root\/flowcontrol-watchdog\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
