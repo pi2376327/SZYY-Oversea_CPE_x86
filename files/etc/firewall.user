@@ -1,57 +1,7 @@
+# This file is interpreted as shell script.
+# Put your custom iptables rules here, they will
+# be executed with each firewall (re-)start.
 
-config defaults
-        option input 'ACCEPT'
-        option output 'ACCEPT'
-        option forward 'ACCEPT'
-        option drop_invalid '1'
-        option fullcone '2'
-
-config zone
-        option name 'lan'
-        option input 'ACCEPT'
-        option output 'ACCEPT'
-        option forward 'ACCEPT'
-        option network 'lan'
-
-config zone
-        option name 'wan'
-        option output 'ACCEPT'
-        option masq '1'
-        option mtu_fix '1'
-        option network 'wan wan6 4G_LTE'
-        option input 'ACCEPT'
-        option forward 'ACCEPT'
-
-config include
-        option path '/etc/firewall.user'
-
-config zone
-        option input 'ACCEPT'
-        option output 'ACCEPT'
-        option name 'vpn'
-        option forward 'ACCEPT'
-        option network 'vpn0 wg0'
-
-config forwarding
-        option dest 'wan'
-        option src 'vpn'
-
-config forwarding
-        option dest 'vpn'
-        option src 'wan'
-
-config forwarding
-        option dest 'vpn'
-        option src 'lan'
-
-config forwarding
-        option dest 'wan'
-        option src 'lan'
-
-config forwarding
-        option dest 'lan'
-        option src 'vpn'
-
-config forwarding
-        option dest 'lan'
-        option src 'wan'
+# Internal uci firewall chains are flushed and recreated on reload, so
+# put custom rules into the root chains e.g. INPUT or FORWARD or into the
+# special user chains, e.g. input_wan_rule or postrouting_lan_rule.
