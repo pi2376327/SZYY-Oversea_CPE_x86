@@ -36,35 +36,31 @@ sed -i 's/set wireless.default_radio${devidx}.ssid=OpenWrt/set wireless.default_
 sed -i 's/set wireless.default_radio${devidx}.encryption=none/set wireless.default_radio${devidx}.encryption=psk2/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=jywx.com' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-#更改wan口默认dns
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option dns '\\\''172\.16\.0\.1'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\sed -i \'\/option proto '\\\''dhcp'\\\''\/a\\\        option peerdns '\\\''0'\\\''\' \/etc\/config\/network"   package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.wan\.dns=\'172\.16\.0\.1\'" package/lean/default-settings/files/zzz-default-settings
-
-#增加vpn0和4G_LTE接口
-sed -i "/exit 0/i\uci set network\.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.vpn0\.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.vpn0\.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE=interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.proto=\'dhcp\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.ifname=\'wwan0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.peerdns=\'0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
-
-#Firewall zon wan增加vpn0、4G_LTE接口,允许wan区域接受ssh端口数据
-sed -i "/exit 0/i\uci set firewall.@zone[1].network=\'wan wan6 4G_LTE vpn0\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci commit firewall" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10]=rule" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].enabled=\'1\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].target=\'ACCEPT\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].src=\'wan\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].dest_port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].name=\'allow-ssh\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].proto=\'tcp\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set firewall.@rule[10].src_ip=\'172.16.0.1\'" package/lean/default-settings/files/zzz-default-settings
+#增加vpn0\wg0接口,更改wan\lan的默认物理接口
+#Ovpn
+sed -i "/exit 0/i\uci set network.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.vpn0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.vpn0.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
+#wireguard
+sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.private_key=\'2NSLFlYklzR0RMdnaFV31V78HcE2MDu3WxIV8aj4Tk4=\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.listen_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.addresses=\'172.31.0.1\/30\'" package/lean/default-settings/files/zzz-default-settings
+#wireguard peer
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0]=wireguard_wg0" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].public_key=\'kMSLZqp2qH5e7Wcf5+gk3rbwQxPwRmF2SXVXZvKSUGI=\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].endpoint_host=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].allowed_ips=\'172.31.0.0\/30\'" package/lean/default-settings/files/zzz-default-settings
+#wan\lan physic interface
+sed -i "/exit 0/i\uci set network.lan.ifname=\'eth1 eth2 eth3\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wan.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wan6.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
+#confirm configuration
+sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings
 
 #更改ssh、web默认端口
 sed -i "/exit 0/i\uci set dropbear\.\@dropbear\[0\]\.Port=\'24680\'" package/lean/default-settings/files/zzz-default-settings
@@ -73,13 +69,3 @@ sed -i "/exit 0/i\uci commit dropbear" package/lean/default-settings/files/zzz-d
 sed -i "/exit 0/i\uci set uhttpd.main.listen_http=\'0.0.0.0:24681\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set uhttpd.main.listen_https=\'0.0.0.0:24682\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit uhttpd" package/lean/default-settings/files/zzz-default-settings 
-
-#添加文件权限
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-up.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /etc/openvpn/openvpn-down.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/update-ip-china-list.sh" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\chmod +x /root/flowcontrol-watchdog.sh" package/lean/default-settings/files/zzz-default-settings
-
-#增加crontab任务
-sed -i "/exit 0/i\echo \'1 2 \* \* sun sh \/root\/update-ip-china-list\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\echo \'\*\/5 \* \* \* \* sh \/root\/flowcontrol-watchdog\.sh\' >> \/etc\/crontabs\/root" package/lean/default-settings/files/zzz-default-settings
