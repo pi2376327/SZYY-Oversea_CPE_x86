@@ -16,3 +16,12 @@
 # Add a feed source
 #echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+
+#删掉默认主题&&下载新主题
+rm -rf package/lean/luci-theme-argon
+git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
+#git clone https://github.com/jerrykuku/luci-app-argon-config.git  package/lean/luci-app-argon-config
+
+#编译frp软件
+rm -rf package/lean/frp
+git clone https://github.com/kuoruan/openwrt-frp.git package/lean/frp
