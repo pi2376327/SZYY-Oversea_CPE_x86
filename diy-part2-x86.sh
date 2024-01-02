@@ -36,7 +36,7 @@ sed -i 's/set wireless.default_radio${devidx}.ssid=OpenWrt/set wireless.default_
 sed -i 's/set wireless.default_radio${devidx}.encryption=none/set wireless.default_radio${devidx}.encryption=psk2/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=jywx.com' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 
-#增加vpn0\wg0\4G_LTE接口,更改wan\lan的默认物理接口
+#增加vpn0\wg0\4G_LTE\gre接口,更改wan\lan的默认物理接口
 #Ovpn
 sed -i "/exit 0/i\uci set network.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.vpn0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
@@ -63,6 +63,19 @@ sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].endpoint_host=\'172.30.8.11\
 sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].allowed_ips=\'172.31.0.0\/30\'" package/lean/default-settings/files/zzz-default-settings
+#gre
+sed -i "/exit 0/i\uci set network.gre=interface" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.ipaddr=\'172.30.4.12\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.peeraddr=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.mtu=\'1440\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.proto=\'gre\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.nohostroute=\'1\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre.zone=\'vpn\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun=\'interface\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun.proto=\'static\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun.ifname=\'@gre\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun.ipaddr=\'172.31.0.1\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun.netmask=\'255.255.255.252\'" package/lean/default-settings/files/zzz-default-settings
 #wan\lan physic interface
 sed -i "/exit 0/i\uci set network.lan.ifname=\'eth1 eth2 eth3\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wan.ifname=\'eth0\'" package/lean/default-settings/files/zzz-default-settings
