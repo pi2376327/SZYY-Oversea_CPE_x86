@@ -50,7 +50,7 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/de
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
 #wireguard
 sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.ifname=\'wg0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.private_key=\'2NSLFlYklzR0RMdnaFV31V78HcE2MDu3WxIV8aj4Tk4=\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.listen_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
