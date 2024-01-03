@@ -41,16 +41,17 @@ sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=
 sed -i "/exit 0/i\uci set network.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.vpn0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.vpn0.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
+#genarate wireguard-key
+sed -i "/exit 0/i\mkdir \/etc\/wireguard  && wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
 #wireguard
 sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0.private_key=\'2NSLFlYklzR0RMdnaFV31V78HcE2MDu3WxIV8aj4Tk4=\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.private_key=''\$(cat \/etc\/wireguard\/privatekey)''" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set network.wg0.private_key=\'2NSLFlYklzR0RMdnaFV31V78HcE2MDu3WxIV8aj4Tk4=\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.listen_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.addresses=\'172.31.1.1\/30\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.mtu=\'1440\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.nohostroute=\'1\'" package/lean/default-settings/files/zzz-default-settings
-#genarate private-public-key
-sed -i "/exit 0/i\mkdir \/etc\/wireguard  && wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
 #wireguard peer
 sed -i "/exit 0/i\uci set network.@wireguard_wg0[0]=wireguard_wg0" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.@wireguard_wg0[0].public_key=\'kMSLZqp2qH5e7Wcf5+gk3rbwQxPwRmF2SXVXZvKSUGI=\'" package/lean/default-settings/files/zzz-default-settings
