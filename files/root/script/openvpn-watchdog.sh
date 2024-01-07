@@ -8,7 +8,7 @@ function exist_tun0(){
 }
 
 if ! exist_tun0;then
-    echo tun0 not exist,restart openvpn >>/root/script/openvpn_watchdog.log
+    echo tun0 not exist,restart openvpn >/root/script/openvpn_watchdog.log
     /etc/init.d/openvpn restart
     exit 0
 else             
