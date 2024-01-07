@@ -16,7 +16,7 @@ else
     tries=0
     gw=$(ip addr show tun0 | grep 'inet ' | cut -d' ' -f6 | cut -d'.' -f1-3).1
     echo  $DATE: Start to check gateway of vpn-tun0
-    echo  $DATE: Start to check gateway of vpn-tun0 >>/root/script/openvpn_watchdog.log
+    echo  $DATE: Start to check gateway of vpn-tun0 >/root/script/openvpn_watchdog.log
     while [[ $tries -lt 5 ]]
     do
         if /bin/ping -c 1 $gw >/dev/null
