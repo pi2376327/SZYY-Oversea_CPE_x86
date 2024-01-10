@@ -80,7 +80,7 @@ sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_host=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0_peer1.allowed_ips=\'172.31.0.0\/30\'" package/lean/default-settings/files/zzz-default-settings 
+sed -i "/exit 0/i\uci set network.wg0_peer1.allowed_ips=\'172.31.1.0\/30\'" package/lean/default-settings/files/zzz-default-settings 
 #gre
 sed -i "/exit 0/i\uci set network.gre=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre.ipaddr=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
