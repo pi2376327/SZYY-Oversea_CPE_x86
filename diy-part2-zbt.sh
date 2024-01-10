@@ -76,7 +76,7 @@ sed -i "/exit 0/i\uci set network.wg0.mtu=\'1440\'" package/lean/default-setting
 sed -i "/exit 0/i\uci set network.wg0.nohostroute=\'1\'" package/lean/default-settings/files/zzz-default-settings
 #wireguard peer
 sed -i "/exit 0/i\uci set network.wg0_peer1=wireguard_wg0" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/publickey)"
+sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/publickey)" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_host=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
@@ -92,7 +92,7 @@ sed -i "/exit 0/i\uci set network.gre.zone=\'vpn\'" package/lean/default-setting
 sed -i "/exit 0/i\uci set network.gre_tun=\'interface\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre_tun.proto=\'static\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre_tun.ifname=\'@gre\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.gre_tun.ipaddr=\'172.31.0.1\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.gre_tun.ipaddr=\'172.31.0.2\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre_tun.netmask=\'255.255.255.252\'" package/lean/default-settings/files/zzz-default-settings
 #confirm configuration
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
