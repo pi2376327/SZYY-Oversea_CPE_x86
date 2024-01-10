@@ -50,20 +50,19 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.peerdns=\'0\'" package/lean/default-s
 sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
 #genarate wireguard-key
+sed -i "/exit 0/i\if \! test -d \/etc\/wireguard;then mkdir -p \/etc\/wireguard;fi" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\mkdir \/etc\/wireguard  && wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
 #wireguard
 sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0.private_key=''\$(cat \/etc\/wireguard\/privatekey)''" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\uci set network.wg0.private_key=\'2NSLFlYklzR0RMdnaFV31V78HcE2MDu3WxIV8aj4Tk4=\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0.private_key=\$(cat \/etc\/wireguard\/privatekey)" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.listen_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.addresses=\'172.31.1.1\/30\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.mtu=\'1440\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.nohostroute=\'1\'" package/lean/default-settings/files/zzz-default-settings
 #wireguard peer
 sed -i "/exit 0/i\uci set network.wg0_peer1=wireguard_wg0" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=''\$(cat \/etc\/wireguard\/publickey)''"
-#sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\'kMSLZqp2qH5e7Wcf5+gk3rbwQxPwRmF2SXVXZvKSUGI=\'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/publickey)"
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_host=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
