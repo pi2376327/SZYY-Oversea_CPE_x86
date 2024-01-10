@@ -38,7 +38,7 @@ sed -i "/exit 0/i\uci set network.vpn0.ifname=\'tun0\'" package/lean/default-set
 sed -i "/exit 0/i\uci set network.vpn0.proto=\'none\'" package/lean/default-settings/files/zzz-default-settings
 #genarate wireguard-key
 sed -i "/exit 0/i\if \! test -d \/etc\/wireguard;then mkdir -p \/etc\/wireguard;fi" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\mkdir \/etc\/wireguard  && wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
 #wireguard
 sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
@@ -49,11 +49,11 @@ sed -i "/exit 0/i\uci set network.wg0.mtu=\'1440\'" package/lean/default-setting
 sed -i "/exit 0/i\uci set network.wg0.nohostroute=\'1\'" package/lean/default-settings/files/zzz-default-settings
 #wireguard peer
 sed -i "/exit 0/i\uci set network.wg0_peer1=wireguard_wg0" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/publickey)"
+sed -i "/exit 0/i\uci set network.wg0_peer1.public_key=\$(cat \/etc\/wireguard\/publickey)" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_host=\'172.30.8.11\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.persistent_keepalive=\'25\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0_peer1.endpoint_port=\'51820\'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\uci set network.wg0_peer1.allowed_ips=\'172.31.0.0\/30\'" package/lean/default-settings/files/zzz-default-settings 
+sed -i "/exit 0/i\uci set network.wg0_peer1.allowed_ips=\'172.31.1.0\/30\'" package/lean/default-settings/files/zzz-default-settings
 #gre
 sed -i "/exit 0/i\uci set network.gre=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre.ipaddr=\'172.30.4.12\'" package/lean/default-settings/files/zzz-default-settings
