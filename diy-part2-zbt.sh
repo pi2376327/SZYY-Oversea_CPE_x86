@@ -65,7 +65,7 @@ sed -i "/exit 0/i\uci set network\.4G_LTE\.dns=\'119.29.29.29\'" package/lean/de
 sed -i "/exit 0/i\uci set network\.4G_LTE\.metric=\'10\'" package/lean/default-settings/files/zzz-default-settings
 #genarate wireguard-key
 sed -i "/exit 0/i\if \! test -d \/etc\/wireguard;then mkdir -p \/etc\/wireguard;fi" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\mkdir \/etc\/wireguard  && wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\wg genkey | tee \/etc\/wireguard\/privatekey | wg pubkey > \/etc/wireguard\/publickey" package/lean/default-settings/files/zzz-default-settings
 #wireguard
 sed -i "/exit 0/i\uci set network.wg0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.wg0.proto=\'wireguard\'" package/lean/default-settings/files/zzz-default-settings
