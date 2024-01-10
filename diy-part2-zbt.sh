@@ -36,19 +36,19 @@ sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Ma
 #sed -i 's/set wireless.default_radio${devidx}.encryption=none/set wireless.default_radio${devidx}.encryption=psk2/g' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 #sed -i '/psk2/a\                        set wireless.default_radio${devidx}.key=jywx.com' package/kernel/mac80211/files/lib/wifi/mac80211.sh
 #2.4G SSID
-#sed -i "/exit 0/i\wireless.radio0.country='CN'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\wireless.radio0.htmode='HT20'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\wireless.radio0.channel='1'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio0.ssid='JYWX-SDWAN'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio0.encryption='psk2'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio0.key='jywx.com'" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set wireless.radio0.country='CN'" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set wireless.radio0.htmode='HT20'" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set wireless.radio0.channel='1'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio0.ssid='JYWX-SDWAN'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio0.encryption='psk2'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio0.key='jywx.com'" package/lean/default-settings/files/zzz-default-settings
 #5G SSID
-#sed -i "/exit 0/i\wireless.radio1.country='CN'" package/lean/default-settings/files/zzz-default-settings
-#sed -i "/exit 0/i\wireless.radio1.channel='36'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.radio1.htmode='VHT40'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio1.ssid='JYWX-SDWAN'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio1.encryption='psk2'" package/lean/default-settings/files/zzz-default-settings
-sed -i "/exit 0/i\wireless.default_radio1.key='jywx.com'" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set wireless.radio1.country='CN'" package/lean/default-settings/files/zzz-default-settings
+#sed -i "/exit 0/i\uci set wireless.radio1.channel='36'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.radio1.htmode='VHT40'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio1.ssid='JYWX-SDWAN'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio1.encryption='psk2'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci set wireless.default_radio1.key='jywx.com'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit wireless" package/lean/default-settings/files/zzz-default-settings 
 
 #增加vpn0\wg0\4G_LTE\gre接口
