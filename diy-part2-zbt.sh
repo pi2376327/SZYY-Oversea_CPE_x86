@@ -51,7 +51,7 @@ sed -i "/exit 0/i\uci set wireless.default_radio1.encryption='psk2'" package/lea
 sed -i "/exit 0/i\uci set wireless.default_radio1.key='jywx.com'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci commit wireless" package/lean/default-settings/files/zzz-default-settings 
 
-#增加vpn0\wg0\4G_LTE\gre接口
+#增加vpn0\wg0\4G_LTE\gre接口,删除wan6接口
 #Ovpn
 sed -i "/exit 0/i\uci set network.vpn0=interface" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.vpn0.ifname=\'tun0\'" package/lean/default-settings/files/zzz-default-settings
@@ -94,6 +94,8 @@ sed -i "/exit 0/i\uci set network.gre_tun.proto=\'static\'" package/lean/default
 sed -i "/exit 0/i\uci set network.gre_tun.ifname=\'@gre\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre_tun.ipaddr=\'172.31.0.2\'" package/lean/default-settings/files/zzz-default-settings
 sed -i "/exit 0/i\uci set network.gre_tun.netmask=\'255.255.255.252\'" package/lean/default-settings/files/zzz-default-settings
+#del interface wan6
+sed -i "/exit 0/i\uci del network.wan6" package/lean/default-settings/files/zzz-default-settings
 #confirm configuration
 sed -i "/exit 0/i\uci commit network" package/lean/default-settings/files/zzz-default-settings  
 
