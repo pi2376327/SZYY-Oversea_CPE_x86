@@ -12,24 +12,22 @@
 
 # Modify default IP
 sed -i 's/192.168.1.1/192.168.150.1/g' package/base-files/files/bin/config_generate
-
 #修改默认主机名
 sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
-
 #修改欢迎banner
 #cat >package/base-files/files/etc/banner<<EOF
 #EOF
-
 #修改默认密码
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
-
 #替换版本和名字，以及设备型号
-sed -i 's/R23.3.3/R23.12.08/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/R24.1.13/R23.12.08/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
 #sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
-
 #更改默认主题
 sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
+#启用console密码
+sed -i "/exit 0/i\uci set system.@system[0].ttylogin='1'" package/lean/default-settings/files/zzz-default-settings
+sed -i "/exit 0/i\uci commit system" package/lean/default-settings/files/zzz-default-settings
 
 #增加vpn0\wg0\4G_LTE\gre接口,删除wan6接口，更改wan/lan的默认物理接口
 #Ovpn
