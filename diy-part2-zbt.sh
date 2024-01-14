@@ -20,7 +20,7 @@ sed -i 's/OpenWrt/JYWX-CPE/g' package/base-files/files/bin/config_generate
 #修改默认密码
 sed -i '1c\root:$1$KFkimD6C$KSpEWi1IcwqWYrESv2fQy/:19074:0:99999:7:::' package/base-files/files/etc/shadow
 #替换版本和名字，以及设备型号
-sed -i 's/R24.1.13/R23.11.11/g' package/lean/default-settings/files/zzz-default-settings
+sed -i 's/R23.11.11/R24.1.14/g' package/lean/default-settings/files/zzz-default-settings
 sed -i 's/OpenWrt/JYWX-CPE/g' package/lean/default-settings/files/zzz-default-settings
 #sed -i "/exit 0/i\sed -i \'s#Zbtlink ZBT-WG3526#JYWX-WIFI-4G#g\' \/proc\/cpuinfo" >>  package/lean/default-settings/files/zzz-default-settings
 #更改默认主题
