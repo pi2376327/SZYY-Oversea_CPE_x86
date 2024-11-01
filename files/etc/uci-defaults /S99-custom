@@ -44,10 +44,11 @@ set network.vpn0=interface
 set network.vpn0.ifname='tun0'
 set network.vpn0.proto='none'
 del network.wan6
-
+del network.@device[0]
+del network.lan.device
+set network.lan.type='bridge'
 set network.lan.ifname='eth1 eth2 eth3'
 set network.wan.ifname='eth0'
-del_list network.@device[0].ports='eth0'
 delete network.wan.device
 commit network
 EOI
