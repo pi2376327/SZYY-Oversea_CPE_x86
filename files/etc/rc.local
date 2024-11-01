@@ -2,8 +2,8 @@
 # the system init finished. By default this file does nothing.
 
 #ipset start with system
-#ipset create chnroute hash:net
-#ipset restore -f /etc/openvpn/chnroute-ipset
+ipset create chnroute hash:net
+ipset restore -f /root/script/chnroute-ipset
 
 
 #关闭bird开机启动
