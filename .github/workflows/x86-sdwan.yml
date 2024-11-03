@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: sdwan_cpe_x86
+name: OverSea_cpe_x86
 
 on:
   repository_dispatch:
