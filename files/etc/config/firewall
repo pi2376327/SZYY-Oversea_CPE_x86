@@ -30,7 +30,8 @@ config zone
         option output 'ACCEPT'
         option name 'vpn'
         option forward 'ACCEPT'
-        option network 'vpn0 wg0'
+        option network 'vpn0'
+        option masq '1'
 
 config forwarding
         option dest 'wan'
