@@ -47,7 +47,7 @@ del network.wan6
 del network.@device[0]
 del network.lan.device
 set network.lan.type='bridge'
-set network.lan.ifname='eth1 eth2 eth3'
+set network.lan.ifname='eth1 eth2 eth3 eth4 eth5'
 set network.wan.ifname='eth0'
 delete network.wan.device
 commit network
