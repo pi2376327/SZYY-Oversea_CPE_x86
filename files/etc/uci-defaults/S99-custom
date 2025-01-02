@@ -63,6 +63,14 @@ set uhttpd.main.listen_https='0.0.0.0:24682'
 commit uhttpd
 EOI
 
+#更改诊断页面默认显示的域名
+uci -q batch <<EOI
+set luci.diag.dns='szyywx.cn'
+set luci.diag.ping='szyywx.cn'
+set luci.diag.route='szyywx.cn'
+commit luci.diag
+EOI
+
 #给脚本文件添加权限
 chmod +x /etc/openvpn/openvpn-up.sh
 chmod +x /etc/openvpn/openvpn-down.sh
