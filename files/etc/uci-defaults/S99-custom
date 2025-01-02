@@ -71,6 +71,12 @@ set luci.diag.route='szyywx.cn'
 commit luci.diag
 EOI
 
+#更改统计端口位tun0
+uci -q batch <<EOI
+set luci_statistics.collectd_interface.Interfaces='tun0'
+commit luci_statistics
+EOI
+
 #给脚本文件添加权限
 chmod +x /etc/openvpn/openvpn-up.sh
 chmod +x /etc/openvpn/openvpn-down.sh
