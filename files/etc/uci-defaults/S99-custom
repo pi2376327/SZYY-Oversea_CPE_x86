@@ -101,5 +101,6 @@ echo '*/40 * * * * /etc/init.d/frp restart' >> /etc/crontabs/root #每40分钟�
 
 #删除多余配置
 rm -rf /etc/config/openvpn_recipes #openvpn自带模版配置
+head -n -20 /etc/profile > tempfile && mv tempfile /etc/profile #删除自带多余banner
 
 exit 0
