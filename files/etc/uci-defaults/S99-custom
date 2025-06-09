@@ -38,18 +38,33 @@ set dhcp.@dnsmasq[0].localservice='0'
 commit dhcp
 EOI
 
-#增加vpn0接口/更改wan/lan绑定接口（X86）
+#更改wifi默认设置（ARM）
+uci -q batch <<EOI
+set wireless.radio0.legacy_rates='1'
+set wireless.radio0.country='US'
+set wireless.radio0.channel='11'
+set wireless.default_radio0.ssid='YYWX-SDWAN'
+set wireless.default_radio0.encryption='psk2'
+set wireless.default_radio0.key='szyywx.cn'
+
+set wireless.radio1.country='US'
+set wireless.radio1.channel='149'
+set wireless.radio1.htmode='VHT40'
+set wireless.default_radio1.ssid='YYWX-SDWAN'
+set wireless.default_radio1.encryption='psk2'
+set wireless.default_radio1.key='szyywx.cn'
+commit wireless
+EOI
+
+sed -i '/option disabled/d' /etc/config/wireless
+sed -i '/set wireless.${name}.disabled/d' /lib/wifi/mac80211.sh
+
+#增加vpn0接口
 uci -q batch <<EOI
 set network.vpn0=interface
 set network.vpn0.ifname='tun0'
 set network.vpn0.proto='none'
 del network.wan6
-del network.@device[0]
-del network.lan.device
-set network.lan.type='bridge'
-set network.lan.ifname='eth1 eth2 eth3 eth4 eth5'
-set network.wan.ifname='eth0'
-delete network.wan.device
 commit network
 EOI
 
@@ -65,9 +80,9 @@ EOI
 
 #更改诊断页面默认显示的域名
 uci -q batch <<EOI
-set luci.diag.dns='szyywx.cn'
-set luci.diag.ping='szyywx.cn'
-set luci.diag.route='szyywx.cn'
+set luci.diag.dns='119.29.29.29'
+set luci.diag.ping='119.29.29.29'
+set luci.diag.route='119.29.29.29'
 commit luci.diag
 EOI
 
