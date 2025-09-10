@@ -15,7 +15,7 @@ EOI
 
 #修改名称,时区, 添加一个ntp服务地址,启用console登录密码
 uci -q batch << EOI
-set system.@system[0].hostname='SWITCH-NET_CPE'
+set system.@system[0].hostname='SWITCH-NET'
 set system.@system[0].zonename='Asia/Shanghai'
 set system.@system[0].timezone='CST-8'
 set system.ntp.use_dhcp='0'
@@ -87,7 +87,7 @@ echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
 echo "DISTRIB_REVISION='R25.09.10'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='SWITCH-NET_CPE '" >> /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='SWITCH-NET '" >> /etc/openwrt_release
 
 #增加crontab任务
 echo '1 2 */3 * * sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
