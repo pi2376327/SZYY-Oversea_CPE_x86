@@ -98,6 +98,6 @@ echo '*/10 * * * * /etc/init.d/rtty restart' >> /etc/crontabs/root
 
 #删除多余配置
 rm -rf /etc/config/openvpn_recipes #openvpn自带模版配置
-head -n 21 /etc/profile > tempfile && mv tempfile /etc/profile #删除自带多余banner
+head -n 40 /etc/profile > tempfile && mv tempfile /etc/profile #删除自带多余banner
 
 exit 0
