@@ -2,8 +2,8 @@
 
 #修改root密码
 passwd root << EOI
-szyywx.cn
-szyywx.cn
+switch-net.com
+switch-net.com
 EOI
 
 #修改默认主题为argon
@@ -15,7 +15,7 @@ EOI
 
 #修改名称,时区, 添加一个ntp服务地址,启用console登录密码
 uci -q batch << EOI
-set system.@system[0].hostname='YYWX-CPE'
+set system.@system[0].hostname='SWITCH-NET_CPE'
 set system.@system[0].zonename='Asia/Shanghai'
 set system.@system[0].timezone='CST-8'
 set system.ntp.use_dhcp='0'
@@ -84,9 +84,9 @@ echo 'nameserver 127.0.0.1' > /etc/resolv.conf #增加dns指向本机dnsmasq
 
 #修改版本名称
 sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
-echo "DISTRIB_REVISION='R24.10.30'" >> /etc/openwrt_release
+echo "DISTRIB_REVISION='R25.09.10'" >> /etc/openwrt_release
 sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
-echo "DISTRIB_DESCRIPTION='YYWX-SDWAN-CPE '" >> /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='SWITCH-NET_CPE '" >> /etc/openwrt_release
 
 #增加crontab任务
 echo '1 2 */3 * * sh /root/script/update-chinaIPList.sh' >> /etc/crontabs/root
@@ -96,6 +96,6 @@ echo '*/10 * * * * /etc/init.d/frpc start' >> /etc/crontabs/root #每10分钟重
 
 #删除多余配置
 rm -rf /etc/config/openvpn_recipes #openvpn自带模版配置
-head -n -20 /etc/profile > tempfile && mv tempfile /etc/profile #删除自带多余banner
+head -n 21 /etc/profile > tempfile && mv tempfile /etc/profile #删除自带多余banner
 
 exit 0
