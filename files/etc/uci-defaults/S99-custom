@@ -43,7 +43,8 @@ uci -q batch <<EOI
 set network.vpn0=interface
 set network.vpn0.ifname='tun0'
 set network.vpn0.proto='none'
-set network.lan.ifname='eth1 eth2 eth3 eth4 eth5'
+set network.@device[0].ports='eth1 eth2 eth3 eth4 eth5'
+set network.wan.device='eth0'
 del network.wan6
 commit network
 EOI
