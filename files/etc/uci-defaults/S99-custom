@@ -28,6 +28,7 @@ EOI
 #修改lan IP和DNSMASQ配置
 uci -q batch << EOI
 set network.lan.ipaddr='192.168.150.1'
+set network.lan.netmask='255.255.255.0'
 commit network
 set dhcp.@dnsmasq[0].cachesize='10000'
 set dhcp.@dnsmasq[0].resolvfile='/etc/resolv.dnsmasq.conf'
