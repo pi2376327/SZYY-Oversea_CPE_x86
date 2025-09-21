@@ -37,8 +37,8 @@ else
         #Delete tmp
         rm -rf /tmp/china-ip
 
-        echo '---------------------------------------------------------------------------'
-        echo $DATE: Update ipset list from github completely at `date +%Y-%m-%d`
-        echo '---------------------------------------------------------------------------'
+        echo '---------------------------------------------------------------------------' > /root/script/update.log
+        echo $DATE: Update ipset list from github completely at `date +%Y-%m-%d` >> /root/script/update.log
+        echo '---------------------------------------------------------------------------' >> /root/script/update.log
         exit 0
 fi
