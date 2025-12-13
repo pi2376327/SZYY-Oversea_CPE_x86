@@ -56,8 +56,10 @@ EOF
 }
 
 if ! is_private_ip "$ips"; then
-        echo "add chnroute $ips" >> /root/script/chnroute-ipset
-        echo "$DATE: Add $ips to the chnroute seccessfully" >>/root/script/ovpn-script.log
+        if ! ipset list | grep "$ips"; then
+                echo "add chnroute $ips" >> /root/script/chnroute-ipset
+                echo "$DATE: Add $ips to the chnroute seccessfully" >>/root/script/ovpn-script.log
+        fi
 else
         echo "$DATE: The $ips is a private ip address" >>/root/script/ovpn-script.log
 fi
