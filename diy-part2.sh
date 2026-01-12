@@ -22,5 +22,8 @@
 #openwrt #CONFIG_PACKAGE_luci-theme-argon=y
 git clone https://github.com/jerrykuku/luci-theme-argon.git package/luci-theme-argon
 
+#redsocks2 
+git clone https://github.com/pi2376327/openwrt-redsocks2.git package/redsocks2
+
 #ssr-plus
 #git clone https://github.com/fw876/helloworld.git package/helloworld
